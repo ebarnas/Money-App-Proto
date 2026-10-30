@@ -1,11 +1,11 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react"
 
 type Screen = "login" | "menu" | "profile" | "budget" | "income"
-type AllocationKey = "gas" | "hobbies" | "bills" | "savings" | "food"
+type AllocationKey = "gas" | "amenities" | "bills" | "savings" | "food"
 
 const initialAllocations: Record<AllocationKey, number> = {
   gas: 20,
-  hobbies: 10,
+  amenities: 10,
   bills: 35,
   savings: 10,
   food: 25,
@@ -13,7 +13,7 @@ const initialAllocations: Record<AllocationKey, number> = {
 
 const labels: Record<AllocationKey, string> = {
   gas: "Gas",
-  hobbies: "Hobbies",
+  amenities: "Amenities",
   bills: "Bills",
   savings: "Savings",
   food: "Food",
@@ -392,8 +392,8 @@ export default function BudgetPlannerApp() {
                 Savings {allocations.savings}%
               </span>
               <span>
-                <i className="swatch hobbies" />
-                Hobbies {allocations.hobbies}%
+                <i className="swatch amenities" />
+                Amenities {allocations.amenities}%
               </span>
             </div>
           </div>

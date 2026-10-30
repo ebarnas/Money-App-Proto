@@ -338,11 +338,11 @@ input:focus {
   display: inline-block;
 }
 
-.taxes { background: #ff646b; }
+.bills { background: #ff646b; }
 .gas { background: #4b91e8; }
 .food { background: #45d17c; }
 .savings { background: #f2be4b; }
-.hobbies { background: #9f72d5; }
+.amenities { background: #9f72d5; }
 
 .projection-list {
   overflow: hidden;
