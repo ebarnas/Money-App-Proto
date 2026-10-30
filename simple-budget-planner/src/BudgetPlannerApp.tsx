@@ -6,7 +6,7 @@ type AllocationKey = "gas" | "hobbies" | "bills" | "savings" | "food"
 const initialAllocations: Record<AllocationKey, number> = {
   gas: 20,
   hobbies: 10,
-  taxes: 35,
+  bills: 35,
   savings: 10,
   food: 25,
 }
@@ -14,7 +14,7 @@ const initialAllocations: Record<AllocationKey, number> = {
 const labels: Record<AllocationKey, string> = {
   gas: "Gas",
   hobbies: "Hobbies",
-  taxes: "Bills",
+  bills: "Bills",
   savings: "Savings",
   food: "Food",
 }
@@ -371,13 +371,13 @@ export default function BudgetPlannerApp() {
               className="pie"
               aria-label={`Budget allocation chart, ${total}% allocated`}
               style={{
-                background: `conic-gradient(#ff646b 0 ${allocations.taxes}%, #4b91e8 ${allocations.taxes}% ${allocations.taxes + allocations.gas}%, #45d17c ${allocations.taxes + allocations.gas}% ${allocations.taxes + allocations.gas + allocations.food}%, #f2be4b ${allocations.taxes + allocations.gas + allocations.food}% ${allocations.taxes + allocations.gas + allocations.food + allocations.savings}%, #9f72d5 ${allocations.taxes + allocations.gas + allocations.food + allocations.savings}% 100%)`,
+                background: `conic-gradient(#ff646b 0 ${allocations.bills}%, #4b91e8 ${allocations.bills}% ${allocations.bills + allocations.gas}%, #45d17c ${allocations.bills + allocations.gas}% ${allocations.bills + allocations.gas + allocations.food}%, #f2be4b ${allocations.bills + allocations.gas + allocations.food}% ${allocations.bills + allocations.gas + allocations.food + allocations.savings}%, #9f72d5 ${allocations.bills + allocations.gas + allocations.food + allocations.savings}% 100%)`,
               }}
             />
             <div className="legend">
               <span>
                 <i className="swatch bills" />
-                Bills {allocations.taxes}%
+                Bills {allocations.bills}%
               </span>
               <span>
                 <i className="swatch gas" />
