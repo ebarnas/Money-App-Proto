@@ -87,10 +87,20 @@ export default function BudgetPlannerApp() {
   const [allocations, setAllocations] = useState<Record<AllocationKey, number>>(
     () => {
       try {
-        return (
-          JSON.parse(localStorage.getItem("budget-allocations") || "") ||
-          initialAllocations
-        )
+        const saved = JSON.parse(
+          localStorage.getItem("budget-allocations") || "{}",
+        ) as Record<string, number>
+
+        // Convert categories saved by older versions of $imple.
+        return {
+          ...initialAllocations,
+          gas: saved.gas ?? initialAllocations.gas,
+          amenities:
+            saved.amenities ?? saved.hobbies ?? initialAllocations.amenities,
+          bills: saved.bills ?? saved.taxes ?? initialAllocations.bills,
+          savings: saved.savings ?? initialAllocations.savings,
+          food: saved.food ?? initialAllocations.food,
+        }
       } catch {
         return initialAllocations
       }
