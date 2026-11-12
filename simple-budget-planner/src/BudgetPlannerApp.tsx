@@ -40,13 +40,15 @@ function AppShell({
   children,
   screen,
   goHome,
+  nightMode,
 }: {
   children: React.ReactNode
   screen: Screen
   goHome: () => void
+  nightMode: boolean
 }) {
   return (
-    <main className="app-shell">
+    <main className={`app-shell${nightMode ? " night-mode" : ""}`}>
       <section className="phone">
         <div className="content">{children}</div>
         {screen !== "login" && (
@@ -66,6 +68,13 @@ function AppShell({
 export default function BudgetPlannerApp() {
   const skipAllocationSave = useRef(false)
   const [screen, setScreen] = useState<Screen>("login")
+  const [nightMode, setNightMode] = useState(
+    () => localStorage.getItem("simple-night-mode") === "true",
+  )
+
+  useEffect(() => {
+    localStorage.setItem("simple-night-mode", String(nightMode))
+  }, [nightMode])
   const [username, setUsername] = useState(
     () => localStorage.getItem("budget-username") || "",
   )
@@ -202,7 +211,7 @@ export default function BudgetPlannerApp() {
   }
 
   return (
-    <AppShell screen={screen} goHome={() => setScreen("menu")}>
+    <AppShell screen={screen} goHome={() => setScreen("menu")} nightMode={nightMode}>
       {screen === "login" && (
         <form className="login-screen" onSubmit={submitAccount}>
           <Avatar />
@@ -357,6 +366,17 @@ export default function BudgetPlannerApp() {
                   {income ? `$${income.toLocaleString()}` : "Not set"}
                 </strong>
               </p>
+              <label className="theme-setting">
+                <span>Night Mode</span>
+                <input
+                  className="theme-checkbox"
+                  type="checkbox"
+                  role="switch"
+                  checked={nightMode}
+                  onChange={(event) => setNightMode(event.target.checked)}
+                  aria-label="Night Mode"
+                />
+              </label>
               <button
                 className="pill-button"
                 onClick={() => setEditingProfile(true)}
